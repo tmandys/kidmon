@@ -1,0 +1,14 @@
+# S..search and replace,R..replace regex,B..base name;opts:I.regex is insensitive,C..continue next rule;regex or leave (n) rightmost subpath before base name;replace
+# match regex and replace whole appname
+S;;FiveM;FiveM
+S;;Fortnite;Fortnite
+S;I;RUSSIAPHOBIA;RussiaPhobia
+S;;FACEIT;FaceItXYZ
+S;>;FaceIt;FaceItXYZ
+S;;lunarclient;Lunar Client
+# get basename and continue next rule
+B;C;.*;-1
+B;C;.*;15
+B;C;.*;0
+# replace extension case-insensitive
+R;I;\.exe$;

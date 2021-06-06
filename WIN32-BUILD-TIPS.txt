@@ -1,0 +1,14 @@
+Compiling KidMon tool on Win32 with Microsoft Visual C++:
+---------------------------------------------------------------
+
+An efficient way, to obtain headers and libraries required by KidMon is using vcpkg from:
+https://github.com/microsoft/vcpkg
+
+(1) Follow the vcpkg installation instructions found in README.md and clone vcpkg e.g. to a folder named "vcpkg"
+    in the your source code directory, e.g. C:\src\vcpkg.
+    cd vcpkg
+
+(2) Install the headers and libraries the following way for 32-bit or 64-bit:
+    .\vcpkg install rapidcsv --triplet x86-windows
+    .\vcpkg install rapidcsv --triplet x64-windows
+

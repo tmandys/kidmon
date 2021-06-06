@@ -327,6 +327,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     LPSTR *szArgList;
     int argCount;
     szArgList = CommandLineToArgvA(GetCommandLineA(), &argCount);
+    int nBasenameIdx = strlen(szArgList[0]);
+    while (nBasenameIdx >= 0) {
+        if (szArgList[0][nBasenameIdx] == '\\') {
+            break;
+        }
+        nBasenameIdx--;
+    }
     bool fConsole = true;
     if (szArgList != NULL) {
         char *c;
@@ -335,7 +342,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
             {
                 printf(TEXT("KidMon v0.1, Copyright (c) 2021 by Mandysoft\n"));
                 printf(TEXT("\n"));
-                printf(TEXT("usage: %s [-h] [-c] [-v] [-i <polling_interval>] [-b <heartbeat>] [-f <db_filename>]\n"), szArgList[0]);
+                printf(TEXT("usage: %s [-h] [-c] [-v] [-i <polling_interval>] [-b <heartbeat>] [-f <db_filename>]\n"), szArgList[0] + nBasenameIdx + 1);
                 printf(TEXT("\n"));
                 printf(TEXT("Usage:\n"));
                 printf(TEXT("  -h  print help\n"));

@@ -24,6 +24,16 @@ THE SOFTWARE.
 #include <map>
 #include <time.h>
 
+#ifdef _WINDOWS_
+#define KIDMON_DATA_DIR "%UserProfile%\\AppData\\LocalLow\\MandySoft\\KidMon\\"
+#else
+#define KIDMON_DATA_DIR "~/.kidmon/"
+#endif
+#define KIDMON_HOURLY_RAW_FILENAME "kidmon_hourly_raw.csv"
+#define KIDMON_HOURLY_FILENAME "kidmon_hourly.csv"
+#define KIDMON_DAILY_FILENAME "kidmon_daily.csv"
+#define KIDMON_WEEKLY_FILENAME "kidmon_weekly.csv"
+#define KIDMON_MONTHLY_FILENAME "kidmon_monthly.csv"
 /*
   Multiplatform base class. Platform dependent stuff goes to child class
   We won't use wchar_t for filename as platform independent functions fopen(), stat(), etc. do not support wide chars.

@@ -25,7 +25,7 @@ THE SOFTWARE.
 #include <shlwapi.h>
 #include "CKidMonWindows.h"
 
-const LPCSTR CKidMonWindows::DEFAULT_DBFILENAME = "%UserProfile%\\AppData\\LocalLow\\MandySoft\\KidMon\\KidMon_hourly_raw.csv";
+const LPCSTR CKidMonWindows::DEFAULT_DBFILENAME = KIDMON_DATA_DIR KIDMON_HOURLY_RAW_FILENAME;
 
 CKidMonWindows::CKidMonWindows(const char* dbFilename, unsigned int heartbeat) : CKidMonBase(dbFilename, heartbeat) {
     m_dbFilename = ExpandFileName(dbFilename);
@@ -66,6 +66,13 @@ BOOL CKidMonWindows::AdjustDirectory(std::string& filename) {
 }
 
 unsigned long CKidMonWindows::GetActiveProcessId() {
+    BOOL fScreenSaver;
+    if (SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0, &fScreenSaver, 0)) {
+        // if screen saver is running then foreground windows is useless
+        if (fScreenSaver) {
+            return 0;
+        }
+    }
     HWND hWnd = GetForegroundWindow();
     if (hWnd) {
         // get process id related to window
