@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);DPSAPI_VERSION=1;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\KidMon</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\KidMonLib;..\KidMon</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\KidMon</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\KidMonLib;..\KidMon</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,7 +149,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\KidMon\CKidMonBase.h" />
+    <ClInclude Include="..\KidMonLib\CKidMonBase.h" />
+    <ClInclude Include="..\KidMonLib\KidMonUtils.h" />
     <ClInclude Include="..\KidMon\CKidMonWindows.h" />
     <ClInclude Include="CKidMonService.h" />
     <ClInclude Include="ServiceBase.h" />
@@ -157,7 +158,7 @@
     <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\KidMon\CKidMonBase.cpp" />
+    <ClCompile Include="..\KidMonLib\CKidMonBase.cpp" />
     <ClCompile Include="..\KidMon\CKidMonWindows.cpp" />
     <ClCompile Include="KidMonService.cpp" />
     <ClCompile Include="ServiceBase.cpp" />

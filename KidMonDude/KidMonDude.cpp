@@ -33,6 +33,7 @@ THE SOFTWARE.
 #include <iomanip>
 #include "CKidMonBase.h"
 #include <rapidcsv.h>
+#include "KidMonUtils.h"
 
 #define RULE_FILENAME "kidmon_rules.csv"
 #define CHART_FILENAME "kidmon_chart.html"
@@ -41,90 +42,7 @@ THE SOFTWARE.
 #define DEFAULT_WEEKS 53
 #define DEFAULT_MONTHS 0
 
-static int fVerbose = 0;
 static int fDryRun = 0;
-
-void debugf(const char* fmt, ...) {
-    if (!fVerbose) {
-        return;
-    }
-    va_list args;
-    va_start(args, fmt);
-    vfprintf(stderr, fmt, args);
-    va_end(args);
-}
-
-char* getCmdOption(char ** begin, char ** end, const std::string & option) {
-    char ** itr = std::find(begin, end, option);
-    if (itr != end && ++itr != end) {
-        return *itr;
-    }
-    return 0;
-}
-
-bool cmdOptionExists(char** begin, char** end, const std::string& option) {
-    return std::find(begin, end, option) != end;
-}
-
-int getCmdOptionInt(char ** begin, char ** end, const std::string & option, int defValue) {
-    char *c = getCmdOption(begin, end, option);
-    if (c) {
-        try {
-            return std::stoi(c);
-        }
-        catch (...) {
-            return defValue;
-        }
-    } else {
-        return defValue;
-    }
-}
-
-std::string expandFileName(const char *filename) {
-#ifdef _WINDOWS_
-    char buffer[MAX_PATH];
-    ExpandEnvironmentStringsA(filename, buffer, sizeof(buffer));
-    std::string res(buffer);
-#else
-    std::string res(filename);
-#endif
-    return res;
-}
-
-bool fileExists(std::string filepath) {
-    //std::ifstream stream;
-    std::ifstream f(filepath);
-    return f.good();
-}
-
-int getBasenameIdx(std::string filepath) {
-    int idx = filepath.find_last_of("/\\");
-    if (idx == std::string::npos) {
-        idx = -1;
-    }
-    return idx + 1;
-}
-
-std::string readFile(std::string filename) {
-    std::ifstream ifs(filename.c_str(), std::ios::in | std::ios::binary | std::ios::ate);
-    std::ifstream::pos_type fileSize = ifs.tellg();
-    ifs.seekg(0, std::ios::beg);
-
-    std::vector<char> bytes((unsigned) fileSize);
-    ifs.read(&bytes[0], fileSize);
-
-    return std::string(&bytes[0], (unsigned) fileSize);
-}
-
-void writeFile(std::string filename, std::string &content) {
-    std::ofstream ofs(filename.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
-    ofs << content;
-}
-
-template <typename T, std::size_t N>
-constexpr std::size_t countof(T const (&)[N]) noexcept {
-    return N;
-}
 
 int main(int argc, char *argv[]) {
     std::string exeFilename(argv[0]);
@@ -135,7 +53,7 @@ int main(int argc, char *argv[]) {
     std::string chartFilename(exeFilename.substr(0, exeBasenameIdx) + CHART_FILENAME);
     char *c;
     if (cmdOptionExists(argv, argv + argc, "-h")) {
-        printf("KidMonDude v0.1, Copyright (c) 2021 by Mandysoft\n");
+        printf("KidMonDude v" KIDMON_VERSION ", Copyright (c) 2021 by Mandysoft\n");
         printf("\n");
         printf("usage: %s [-h] [-v] [-d] [-n] [-r <rule_filename>] [-f <src_filename>] [-c <chart_filename>] [-H <hours>] [-D <days>] [-W <weeks>] [-M <months>]\n", exeFilename.substr(exeBasenameIdx).c_str());
         printf("\n");

@@ -32,25 +32,13 @@ THE SOFTWARE.
 #include <algorithm>
 
 #include "CKidMonWindows.h"
-
+#include "KidMonUtils.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-static int fVerbose = 0;
-
 using namespace std;
-
-void debugf(const char* fmt, ...) {
-    if (!fVerbose) {
-        return;
-    }
-    va_list args;
-    va_start(args, fmt);
-    vfprintf(stderr, fmt, args);
-    va_end(args);
-}
 
 void printError(TCHAR* msg)
 {
@@ -73,21 +61,6 @@ void printError(TCHAR* msg)
 
     // Display the message
     fprintf(stderr, TEXT("\n  WARNING: %s failed with error %d (%s)\n"), msg, eNum, sysMsg);
-}
-
-char* getCmdOption(char ** begin, char ** end, const std::string & option)
-{
-    char ** itr = std::find(begin, end, option);
-    if (itr != end && ++itr != end)
-    {
-        return *itr;
-    }
-    return 0;
-}
-
-bool cmdOptionExists(char** begin, char** end, const std::string& option)
-{
-    return std::find(begin, end, option) != end;
 }
 
 // there is only wide char variant in API
@@ -327,22 +300,18 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
     LPSTR *szArgList;
     int argCount;
     szArgList = CommandLineToArgvA(GetCommandLineA(), &argCount);
-    int nBasenameIdx = strlen(szArgList[0]);
-    while (nBasenameIdx >= 0) {
-        if (szArgList[0][nBasenameIdx] == '\\') {
-            break;
-        }
-        nBasenameIdx--;
-    }
+    std::string exeFilename(szArgList[0]);
+    int exeBasenameIdx = getBasenameIdx(exeFilename);
+
     bool fConsole = true;
     if (szArgList != NULL) {
         char *c;
         if (cmdOptionExists(szArgList, szArgList + argCount, "-h")) {
             if (AttachParentConsole(CONSOLE_LEN) || CreateNewConsole(CONSOLE_LEN))
             {
-                printf(TEXT("KidMon v0.1, Copyright (c) 2021 by Mandysoft\n"));
+                printf(TEXT("KidMon v" KIDMON_VERSION ", Copyright (c) 2021 by MandySoft\n"));
                 printf(TEXT("\n"));
-                printf(TEXT("usage: %s [-h] [-c] [-v] [-i <polling_interval>] [-b <heartbeat>] [-f <db_filename>]\n"), szArgList[0] + nBasenameIdx + 1);
+                printf(TEXT("usage: %s [-h] [-c] [-v] [-i <polling_interval>] [-b <heartbeat>] [-f <db_filename>]\n"), exeFilename.substr(exeBasenameIdx).c_str());
                 printf(TEXT("\n"));
                 printf(TEXT("Usage:\n"));
                 printf(TEXT("  -h  print help\n"));

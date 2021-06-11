@@ -30,10 +30,13 @@
     <ClInclude Include="CKidMonService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\KidMon\CKidMonBase.h">
+    <ClInclude Include="..\KidMon\CKidMonWindows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\KidMon\CKidMonWindows.h">
+    <ClInclude Include="..\KidMonLib\CKidMonBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\KidMonLib\KidMonUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,10 +53,10 @@
     <ClCompile Include="CKidMonService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\KidMon\CKidMonBase.cpp">
+    <ClCompile Include="..\KidMon\CKidMonWindows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\KidMon\CKidMonWindows.cpp">
+    <ClCompile Include="..\KidMonLib\CKidMonBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
