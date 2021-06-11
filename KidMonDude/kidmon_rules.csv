@@ -3,12 +3,9 @@
 S;;FiveM;FiveM
 S;;Fortnite;Fortnite
 S;I;RUSSIAPHOBIA;RussiaPhobia
-S;;FACEIT;FaceItXYZ
-S;>;FaceIt;FaceItXYZ
+S;;FACEIT;FaceIt
 S;;lunarclient;Lunar Client
 # get basename and continue next rule
-B;C;.*;-1
-B;C;.*;15
 B;C;.*;0
 # replace extension case-insensitive
 R;I;\.exe$;

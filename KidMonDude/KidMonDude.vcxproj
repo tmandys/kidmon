@@ -152,6 +152,9 @@
   <ItemGroup>
     <ClCompile Include="KidMonDude.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="kidmon_chart.html" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

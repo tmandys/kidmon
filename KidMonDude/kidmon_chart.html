@@ -1,0 +1,233 @@
+<html>
+  <head>
+    <title>Application statistics</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawCharts);
+
+        var csvHourly =
+// <__CSV_HOURLY__>
+`"2021-05-28 13:00";Discord;0.000;0.252
+"2021-05-28 13:00";chrome;0.000;0.036
+"2021-05-28 13:00";ShellExperienceHost;0.000;0.036
+"2021-05-28 13:00";explorer;0.000;0.012
+"2021-05-28 14:00";chrome;2.772;5.604
+"2021-05-28 14:00";Discord;0.132;2.548
+"2021-05-28 14:00";steam;0.000;0.516
+"2021-05-28 14:00";RadeonSoftware;0.000;0.152
+"2021-05-28 14:00";EpicGamesLauncher;0.000;0.096
+"2021-05-28 14:00";explorer;0.000;0.096
+"2021-05-28 14:00";FiveM;0.000;0.048
+"2021-05-28 14:00";SearchApp;0.000;0.012
+"2021-05-28 18:00";chrome;0.564;1.944
+"2021-05-28 18:00";FiveM;0.000;0.420
+"2021-05-28 18:00";Discord;0.000;0.168
+"2021-05-28 18:00";explorer;0.000;0.096
+"2021-05-28 18:00";OneDrive;0.000;0.012
+"2021-05-28 18:00";ApplicationFrameHost;0.000;0.012
+"2021-05-28 21:00";chrome;0.000;0.072
+"2021-05-28 21:00";explorer;0.012;0.036
+"2021-05-28 21:00";FiveM;0.000;0.036
+"2021-05-28 21:00";Discord;0.000;0.012
+"2021-05-28 21:00";OneDrive;0.000;0.012
+"2021-05-28 21:00";Taskmgr;0.000;0.012
+"2021-05-28 21:00";steamwebhelper;0.000;0.012
+"2021-05-29 10:00";chrome;3.060;2.664
+"2021-05-29 10:00";FiveM;0.084;1.104
+"2021-05-29 10:00";explorer;0.012;0.804
+"2021-05-29 10:00";NordVPN;0.420;0.312
+"2021-05-29 10:00";Discord;0.012;0.408
+"2021-05-29 10:00";ReShade_Setup_4.9.1;0.000;0.336
+"2021-05-29 10:00";ApplicationFrameHost;0.000;0.152
+"2021-05-29 10:00";SearchApp;0.000;0.084
+"2021-05-29 10:00";EpicGamesLauncher;0.000;0.048
+"2021-05-29 10:00";FaceIt;0.000;0.036
+"2021-05-29 10:00";Lightshot;0.000;0.036
+"2021-05-29 10:00";WinRAR;0.000;0.012
+"2021-05-29 11:00";FiveM;0.228;8.664
+"2021-05-29 11:00";chrome;0.864;2.064
+"2021-05-29 11:00";explorer;0.000;0.096
+"2021-05-29 11:00";Discord;0.000;0.048
+"2021-05-29 11:00";SndVol;0.000;0.036
+`
+// </__CSV_HOURLY__>
+        ;
+
+        var csvDaily =
+// <__CSV_DAILY__>
+`2021-05-28;chrome;3.336;7.654
+2021-05-28;Discord;0.132;2.988
+2021-05-28;steam;0.000;0.516
+2021-05-28;FiveM;0.000;0.504
+2021-05-28;explorer;0.012;0.240
+2021-05-28;RadeonSoftware;0.000;0.152
+2021-05-28;EpicGamesLauncher;0.000;0.096
+2021-05-28;OneDrive;0.000;0.036
+2021-05-28;ShellExperienceHost;0.000;0.036
+2021-05-28;SearchApp;0.000;0.012
+2021-05-28;Taskmgr;0.000;0.012
+2021-05-28;steamwebhelper;0.000;0.012
+2021-05-28;ApplicationFrameHost;0.000;0.012
+2021-05-29;FiveM;0.312;9.756
+2021-05-29;chrome;3.912;4.728
+2021-05-29;explorer;0.012;0.912
+2021-05-29;NordVPN;0.420;0.312
+2021-05-29;Discord;0.012;0.456
+2021-05-29;ReShade_Setup_4.9.1;0.000;0.336
+2021-05-29;ApplicationFrameHost;0.000;0.152
+2021-05-29;SearchApp;0.000;0.084
+2021-05-29;EpicGamesLauncher;0.000;0.048
+2021-05-29;FaceItXYZ;0.000;0.036
+2021-05-29;Lightshot;0.000;0.036
+2021-05-29;SndVol;0.000;0.036
+2021-05-29; WinRAR;0.000;0.012
+`
+// </__CSV_DAILY__>
+        ;
+
+        var csvWeekly =
+// <__CSV_WEEKLY__>
+`2021-W21;chrome;12.436;23.028
+2021-W21;ApplicationFrameHost;34.236;0.116
+2021-W21;FiveM;1.024;24.748
+2021-W21;csgo;0.432;11.751
+2021-W21;Discord;0.816;9.656
+2021-W21;explorer;0.084;1.976
+2021-W21;voicemeeterpro;0.000;1.244
+2021-W21;RussiaPhobia;0.000;0.708
+2021-W21;steam;0.000;0.576
+2021-W21;ClownfishVoiceChanger;0.000;0.276
+2021-W21;NordVPN;0.140;0.116
+2021-W21;rundll32;0.000;0.216
+2021-W21;cmd;0.148;0.032
+2021-W21;WinRAR;0.000;0.156
+2021-W21;notepad;0.000;0.116
+2021-W21;SearchApp;0.000;0.116
+2021-W21;ReShade_Setup_4.9.1;0.000;0.112
+2021-W21;EpicGamesLauncher;0.000;0.096
+2021-W21;FaceIt;0.000;0.096
+2021-W21;Taskmgr;0.000;0.096
+2021-W21;SndVol;0.000;0.088
+2021-W21;steamwebhelper;0.000;0.088
+2021-W21;WhatsApp;0.000;0.060
+2021-W21;RadeonSoftware;0.000;0.051
+2021-W21;ShellExperienceHost;0.000;0.050
+2021-W21;Lightshot;0.000;0.044
+2021-W21;lghub;0.000;0.024
+2021-W21;OneDrive;0.000;0.012
+2021-W21;OpenWith;0.000;0.012
+2021-W21;CitizenFX_uninstall_1622049480;0.000;0.004
+2021-W21;GK550;0.000;0.004
+2021-W21;StartMenuExperienceHost;0.000;0.004
+`
+// </__CSV_WEEKLY__>
+        ;
+
+        var csvMonthly =
+// <__CSV_MONTHLY__>
+`2021-05;FiveM;3.114;149.994
+2021-05;chrome;56.916;70.584
+2021-05;ApplicationFrameHost;51.360;0.516
+2021-05;Discord;3.732;26.772
+2021-05;csgo;0.750;27.006
+2021-05;"Lunar Client";0.618;8.340
+2021-05;explorer;0.264;5.784
+2021-05;steam;0.018;3.642
+2021-05;GTA5;0.006;1.974
+2021-05;voicemeeterpro;0.000;1.866
+2021-05;RussiaPhobia;0.000;1.062
+2021-05;FaceIt;0.006;0.990
+2021-05;Fortnite;0.084;0.624
+2021-05;NordVPN;0.342;0.186
+2021-05;EpicGamesLauncher;0.018;0.456
+2021-05;ClownfishVoiceChanger;0.000;0.414
+2021-05;SearchApp;0.000;0.384
+2021-05;WinRAR;0.000;0.348
+2021-05;rundll32;0.000;0.324
+2021-05;ReShade_Setup_4.9.1;0.000;0.306
+2021-05;Taskmgr;0.000;0.300
+2021-05;cmd;0.223;0.048
+2021-05;Lightshot;0.000;0.240
+2021-05;steamwebhelper;0.000;0.210
+2021-05;notepad;0.000;0.186
+2021-05;SndVol;0.000;0.186
+2021-05;OneDrive;0.000;0.162
+2021-05;lghub;0.000;0.126
+2021-05;ShellExperienceHost;0.000;0.108
+2021-05;WhatsApp;0.000;0.090
+2021-05;RadeonSoftware;0.000;0.084
+2021-05;WerFault;0.000;0.042
+2021-05;SocialClubHelper;0.000;0.036
+2021-05;OpenWith;0.000;0.018
+2021-05;GK550;0.000;0.018
+2021-05;CitizenFX_uninstall_1622049480;0.000;0.006
+2021-05;StartMenuExperienceHost;0.000;0.006
+`
+// </__CSV_MONTHLY__>
+        ;
+
+        function CsvToDataTable(csvString, cntIdx) {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Date');
+            var arrayData = $.csv.toArrays(csvString, { separator: ';' });
+            var columns = [];
+            var rows = [];
+            arrayData.forEach(function (item, index) {
+                var val = Number(item[2 + cntIdx]);
+                if (val != 0.000) {
+                    if (!(item[0] in rows)) {
+                        rows[item[0]] = data.addRow();
+                        data.setCell(rows[item[0]], 0, item[0]);
+                    }
+                    if (!(item[1] in columns)) {
+                        columns[item[1]] = data.addColumn('number', item[1]);
+                    }
+                    data.setCell(rows[item[0]], columns[item[1]], val);
+                }
+            });
+            return data;
+        };
+
+        function drawCharts() {
+            var options = {
+                chart: {
+                    title: '',
+                    subtitle: 'Time spent in application in hours',
+                },
+                isStacked: true,
+                height: 300,
+                legend: { position: 'top', maxLines: 3 },
+                vAxis: { minValue: 0 },
+                bar: { groupWidth: '75%' }
+            };
+            var charts = [
+                { name: 'hourly', data: csvHourly, title: 'Hourly' },
+                { name: 'daily', data: csvDaily, title: 'Daily' },
+                { name: 'weekly', data: csvWeekly, title: 'Weekly' },
+                { name: 'monthly', data: csvMonthly, title: 'Monthly' }
+            ];
+            charts.forEach(function (item, index) {
+                ['passive', 'active'].forEach(function (it2, idx2) {
+                    var chart = new google.charts.Bar(document.getElementById(item['name'] + '_chart_' + idx2));
+                    options['chart']['title'] = 'App Time: ' + item['title'] + ' Period: ' + it2;
+                    var data = CsvToDataTable(item['data'], idx2);
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                });
+            });
+        }
+    </script>
+  </head>
+  <body>
+    <div id="monthly_chart_0" style="width: 800px; height: 500px;"></div>
+    <div id="monthly_chart_1" style="width: 800px; height: 500px;"></div>
+    <div id="weekly_chart_0" style="width: 800px; height: 500px;"></div>
+    <div id="weekly_chart_1" style="width: 800px; height: 500px;"></div>
+    <div id="daily_chart_0" style="width: 800px; height: 500px;"></div>
+    <div id="daily_chart_1" style="width: 800px; height: 500px;"></div>
+    <div id="hourly_chart_0" style="width: 800px; height: 500px;"></div>
+    <div id="hourly_chart_1" style="width: 800px; height: 500px;"></div>
+  </body>
+</html>

@@ -64,7 +64,9 @@ KidMonDude
 ----------
 
 KidMon output file kidmon_hourly_raw.csv should be periodically processed using KidMonDude which aggregates data in RRD manner. 
-The file kidmon_hourly_raw.csv is renamed to avoid race with KindMon which will create new file. 
+The file kidmon_hourly_raw.csv is renamed to avoid race with KindMon which will create new file. The data are also propagated
+to HTML template to visualize using Google Charts API. The CSV data are injected into local file based on template.
+The charts are rendered locally on client machine, no data are sent outside.
 
 ---- kidmon_rules.csv
 
@@ -186,3 +188,13 @@ Visual C++ Redistributable for Visual Studio 2015 (MSVCP140.dll, VCRUNTIME140.dl
 Note:
 The functionality cannot be implemented as (system) service as API function cannot provide information about
 user applications (active window, etc.). So the workaround is hidden application under user account.
+
+TODO:
+Upload to gsheet
+https://medium.com/craftsmenltd/from-csv-to-google-sheet-using-python-ef097cb014f9
+Google Drive API
+https://developers.google.com/drive/api/v3/reference/files/update
+Google Sheet API
+https://developers.google.com/sheets/api
+OAuth2 C#
+https://github.com/googlesamples/oauth-apps-for-windows/tree/master/OAuthConsoleApp
