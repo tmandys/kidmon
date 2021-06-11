@@ -5,10 +5,10 @@ Utilities intended as free parental control tools to collect data about running 
 ## Projects
 
 ### KidMon
-It is Win32 (Windows 7/10) app running silently on background under user account and logging statistics hourly to CSV file. See [ReadMe.exe in project directory](./kidmon/ReadMe.txt) for more info.
+It is Win32 (Windows 7/10) app running silently on background under user account and logging statistics hourly to CSV file. See [ReadMe.exe in project directory](./KidMon/ReadMe.txt) for more info.
 
 ### KidMonDude
-Aggregation utility to make RRD .CSV fiels and .HTML charts using Google Charts. See [ReadMe.exe in project directory](./kidmondude/ReadMe.txt) for more info.
+Aggregation utility to make RRD .CSV fiels and .HTML charts using Google Charts. See [ReadMe.exe in project directory](./KidMonDude/ReadMe.txt) for more info.
 
 ### KidMonLib
 Shared library files
